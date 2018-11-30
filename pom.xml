@@ -129,14 +129,4 @@
 		<outputDirectory>${basedir}/src/main/webapp/WEB-INF/classes</outputDirectory>
 		 -->
 	</build>
-	<distributionManagement>
-		<repository>
-			<id>nexus</id>
-			<url>http://192.168.1.230:8081/nexus/content/repositories/releases</url>
-		</repository>
-		<snapshotRepository>
-			<id>nexus-snapshots</id>
-			<url>http://192.168.1.230:8081/nexus/content/repositories/snapshots</url>
-		</snapshotRepository>
-	</distributionManagement>
 </project>

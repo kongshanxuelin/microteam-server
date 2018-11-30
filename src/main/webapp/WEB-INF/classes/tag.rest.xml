@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<servlets>
+        <servlet>
+                <class>com.sumscope.tag.rest.servlet.AjaxTagSQLAddServlet</class>
+                <url>/tag/sql/*/add</url>
+        </servlet>
+        <servlet>
+                <class>com.sumscope.tag.rest.servlet.AjaxTagSQLBizServlet</class>
+                <url>/tag/sql/*/biz</url>
+        </servlet>
+        <servlet>
+                <class>com.sumscope.tag.rest.servlet.AjaxTagSQLDeleteServlet</class>
+                <url>/tag/sql/*/del</url>
+        </servlet>
+        <servlet>
+                <class>com.sumscope.tag.rest.servlet.AjaxTagSQLGetServlet</class>
+                <url>/tag/sql/*/get</url>
+        </servlet>
+        <servlet>
+                <class>com.sumscope.tag.rest.servlet.AjaxTagSQLSaveServlet</class>
+                <url>/tag/sql/*/save</url>
+        </servlet>
+        <servlet>
+                <class>com.sumscope.tag.rest.servlet.AjaxTagLoginServlet</class>
+                <url>/tag/login</url>
+        </servlet>    
+        <servlet>
+                <class>com.sumscope.tag.rest.servlet.AjaxTagLogoutServlet</class>
+                <url>/tag/logout</url>
+        </servlet> 
+        <servlet>
+                <class>com.sumscope.tag.rest.servlet.AjaxTagExportServlet</class>
+                <url>/tag/export</url>
+        </servlet>    
+        <servlet>
+                <class>com.sumscope.tag.rest.servlet.PluginResourceServlet</class>
+                <url>/plugin-page/*</url>
+        </servlet>                     
+</servlets>

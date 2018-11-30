@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+				targetNamespace="http://www.sumscope.com"
+				xmlns:nxs="http://www.sumscope.com"
+				elementFormDefault="qualified">
+    <xs:simpleType name="keyType">
+	 	<xs:restriction base="xs:string">
+    		<xs:pattern value="([a-zA-Z0-9_\-.$])+"/>
+  		</xs:restriction>
+	 </xs:simpleType>	
+	 <xs:simpleType name="idType">
+	 	<xs:restriction base="xs:string">
+	 		<xs:pattern value="([a-zA-Z0-9_])+"/>
+	 	</xs:restriction>
+	 </xs:simpleType>	 		
+	 <xs:simpleType name="dbtype">
+    	<xs:restriction base="xs:string">
+    		<xs:enumeration value="mysql"/>
+    		<xs:enumeration value="oralce"/>
+    		<xs:enumeration value="mssql"/>
+    		<xs:enumeration value="hive"/>
+  		</xs:restriction>
+    </xs:simpleType>   
+    <xs:simpleType name="cachepolicy">
+    	<xs:restriction base="xs:string">
+    		<xs:enumeration value="LRU"/>
+    		<xs:enumeration value="FIFO"/>
+    		<xs:enumeration value="LFU"/>
+  		</xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="scriptType">
+    	<xs:restriction base="xs:string">
+    		<xs:enumeration value="sql"/>
+    		<xs:enumeration value="java"/>
+  		</xs:restriction>
+    </xs:simpleType>
+	 <xs:simpleType name="dbKeyType">
+    	<xs:restriction base="xs:string">
+    		<xs:enumeration value="driver"/>
+    		<xs:enumeration value="url"/>
+    		<xs:enumeration value="user"/>
+    		<xs:enumeration value="password"/>
+    		<xs:enumeration value="maxActive"/>
+    		<xs:enumeration value="maxIdle"/>
+    		<xs:enumeration value="minIdle"/>
+    		<xs:enumeration value="maxWait"/>
+    		<xs:enumeration value="timeBetweenEvictionRunsMillis"/>
+    		<xs:enumeration value="minEvictableIdleTimeMillis"/>
+  		</xs:restriction>
+    </xs:simpleType>    
+	 <xs:simpleType name="booleanType">
+    	<xs:restriction base="xs:string">
+    		<xs:enumeration value="true"/>
+    		<xs:enumeration value="false"/>
+  		</xs:restriction>
+    </xs:simpleType>    				
+</xs:schema>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<app xmlns="http://www.sumslack.com"  
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.sumslack.com http://doc.idbhost.com/schema/jsptagex/app.cfg.xsd" >
+	<!-- 全局变量定义处 -->
+	<global>
+		<item name="show-sql"  value="true" />
+		<item name="mode"  value="product" />
+		
+		<!-- 自定义登录模式 -->
+		<item name="login.type" value="db" />
+		<item name="login.appid" value="1" />
+		<!-- 认证中心连接的数据库不是默认数据源，需指定：login.datasource  -->	
+		<!-- 简单登录模式	
+		<item name="login.type" value="db" />																				
+		<item name="login.getuser" value="select pass passwd,truename name from base_user where username=${param.username}" />				
+		<item name="login.getroles" value="select 1 roleid" />	
+		<item name="login.field.password" value="passwd" />																	
+		-->
+
+		<item name="login.passwd.type" value="plain" /> 																	
+		<item name="login.param.username" value="username" />																<!-- 网页传入的用户名Key -->
+		<item name="login.param.password" value="passwd" />																	<!-- 网页传入的密码Key -->
+		
+		<item name="login.url.login" value="/login.jsp"/>																			<!-- 登录页面 -->
+		<item name="login.url.security.ignore" value="/css/**,/js/**,/img/**,/images/**,/r/wx/act/**,/login.jsp,/failed.jsp,/tag/login,/tag/logout"/>		<!-- 这些地址的URL将不做检查，直接放行 -->
+		<item name="login.url.success" value="/index.jsp?id=1" />																	<!-- 登录成功后跳转的页面，也可以不定义，不定义页面不跳转，自己Ajax处理 -->
+		<item name="login.url.failed" value="/failed.jsp" />																		<!-- 登录失败后跳转的页面，也可以不定义，不定义页面不跳转，自己Ajax处理-->
+		<item name="login.url.logout" value="/login.jsp" />																		<!-- 登录页面后跳转的页面-->
+		
+		<!-- security标签配置 -->
+		<item name="sec.disableUISecurity" value="true" />
+		<item name="sec.tip.prefix" value="&lt;span class='secHiddenUI'&gt;" />
+		<item name="sec.tip.suffix" value="&lt;/span&gt;" />
+		
+		
+		
+		<!-- 如果需要使用WebSocket标签，以下配置是必须的 -->
+		<item name="websocket.server.enable" value="false"/>																				<!-- 是否启用WebSocket服务器，Websocket服务可以独立部署 -->
+		<item name="websocket.server.port" value="8888"/>																				<!-- WebSocket bind端口，与js侦听的端口配对 -->
+		<item name="websocket.client.enable" value="true"/>																				<!-- 是否启用WebSocket客户端，用于Java程序Push消息到前端 -->
+		<item name="websocket.client.ip" value="localhost"/>																			<!-- WebSocket Server侦听的IP -->
+		<item name="websocket.client.port" value="3333"/>																				<!-- WebSocket Server侦听的端口，内部Java之间通信走的是3333端口，固定 -->
+		
+		<!-- 导出文件的临时存放文件夹 -->
+		<item name="export.dir.tmp" value="c:/temp/"/>
+		<item name="dao-scan-package" value="com.sumslack.web.working.dao"/>
+		<!-- tencent ai -->
+		<item name="ai.appid" value="1106930444" />
+		<item name="ai.appkey" value="LAaEQwRoOQmZfh9A" />
+		
+		<!-- wx app config -->
+		<item name="wx.appid" value="xxxxx"/>
+		<item name="wx.seckey" value="xxxxx"/>
+		<item name="wx.mchid" value="xxxx"/>
+		<item name="wx.mchkey" value="xxxxx"/>
+		<item name="wx.paynotify" value="xxxxxx"/>
+		<item name="wx.template.notify" value="xxxxx" />
+		
+		<item name="net.url" value="xxxx"/>
+		<item name="upload.url" value="xxxx"/>		
+	</global>
+	<caches>
+		<cache name="testCache" cache2disk="false" idletime="30" max-num="1000" livetime="60" policy="LRU"/>
+	</caches>
+	<!-- 这里加入定时任务定义  -->
+	<jobs>
+		<job name="jobInit" class="com.sumslack.web.working.jobs.JobInit" freq="false"/>
+		<!-- 每天凌晨两点计算团队活动状态 -->
+		<job name="jobAct" class="com.sumslack.web.working.jobs.JobAct" freq="true" cron="0 0 2 * * ?"/>
+		<job name="jobActFinish" class="com.sumslack.web.working.jobs.JobActFinish" freq="true" cron="0/30 * * * * ?"/>
+	</jobs>
+	
+	<!-- 定义任意个数据源 -->
+	<datasources>
+		<datasource dbtype="mysql" name="default" class="com.alibaba.druid.pool.DruidDataSource">
+			<property name="driver" value="com.mysql.jdbc.Driver" />
+			<property name="url" value="jdbc:mysql://192.168.1.215:3306/sumslack_work?useUnicode=true&amp;characterEncoding=utf8&amp;autoReconnect=true" />
+			<property name="user" value="dev" />
+			<property name="password" value="123456" />
+			<property name="maxActive" value="10" />
+			<property name="maxIdle" value="5" />
+			<property name="minIdle" value="0" />
+			<property name="maxWait" value="100000" />
+			<property name="timeBetweenEvictionRunsMillis" value="600000" />
+			<property name="minEvictableIdleTimeMillis" value="300000" />
+		</datasource>
+	</datasources>
+	<!-- 定义所有结果集，含对结果集操作的SQL语句(按需) -->
+	<datasets>
+		<dataset ds-rel="default" recursive="true" pattern="true" name="tag" title="测试库相关的数据集" file="classpath:/(tag_)(\S*?)(\.xml)" />
+	</datasets>	
+</app>

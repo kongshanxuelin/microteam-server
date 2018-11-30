@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+				targetNamespace="http://www.sumscope.com"
+				xmlns:nxs="http://www.sumscope.com"
+				elementFormDefault="qualified">
+	<xs:include schemaLocation="common.xsd"/>	
+	<xs:element name="app">
+		<xs:complexType>
+    		<xs:all>
+    			<xs:element name="global"  minOccurs="0">
+    				<xs:complexType>
+    					<xs:sequence>
+    						<xs:element name="item" minOccurs="0" maxOccurs="unbounded">
+    							<xs:complexType>
+    								<xs:attribute name="name" type="nxs:keyType" use="required"/>
+    								<xs:attribute name="value" type="xs:string" use="required"/>
+    							</xs:complexType>
+    						</xs:element>
+    					</xs:sequence>
+    				</xs:complexType>
+    			</xs:element>
+
+       			<xs:element name="caches" minOccurs="0">
+    				<xs:complexType>
+    					<xs:sequence>
+    						<xs:element name="cache" minOccurs="1" maxOccurs="unbounded">
+    							<xs:complexType>
+    								<xs:attribute name="name" type="xs:string" use="required"/>
+    								<xs:attribute name="idletime" type="xs:int" default="0"/>
+    								<xs:attribute name="livetime" type="xs:int" default="0"/>
+    								<xs:attribute name="cache2disk" type="xs:boolean" default="false"/>
+    								<xs:attribute name="max-num" type="xs:int" default="1000"/>
+    								<xs:attribute name="policy" type="nxs:cachepolicy" default="LRU"/>
+    								<xs:attribute name="external" type="xs:boolean" default="false"/>
+    							</xs:complexType>
+    						</xs:element>
+    					</xs:sequence>
+    				</xs:complexType>
+    			</xs:element> 	
+    			
+       			<xs:element name="jobs" minOccurs="0">
+    				<xs:complexType>
+    					<xs:sequence>
+    						<xs:element name="job" minOccurs="1" maxOccurs="unbounded">
+    							<xs:complexType>
+    								<xs:attribute name="name" type="xs:string" use="required"/>
+    								<xs:attribute name="title" type="xs:string"/>
+    								<xs:attribute name="class" type="xs:string" use="required"/>
+    								<xs:attribute name="cron" type="xs:string"/>
+    								<xs:attribute name="freq" type="xs:boolean" default="false"/>
+    								<xs:attribute name="ds-rel" type="xs:string"/>
+    							</xs:complexType>
+    						</xs:element>
+    					</xs:sequence>
+    				</xs:complexType>
+    			</xs:element> 	
+
+       			<xs:element name="datasources" minOccurs="1">
+    				<xs:complexType>
+    					<xs:sequence>
+    						<xs:element name="datasource" minOccurs="1" maxOccurs="unbounded">
+    							<xs:complexType>
+    								<xs:sequence>
+    									<xs:element name="property" maxOccurs="unbounded">
+    										<xs:complexType>
+    											<xs:simpleContent>
+    												<xs:extension base="xs:string">
+    													<xs:attribute name="name" type="nxs:dbKeyType" use="required"/>
+    													<xs:attribute name="value" type="xs:string" use="required"/>
+    												</xs:extension>
+    											</xs:simpleContent>
+    										</xs:complexType>
+    									</xs:element>
+    								</xs:sequence>
+    								<xs:attribute name="name" type="nxs:keyType" use="required"/>
+    								<xs:attribute name="title" type="xs:string"/>
+    								<xs:attribute name="type" type="xs:string"/>
+    								<xs:attribute name="dbtype" type="nxs:dbtype"/>
+    								<xs:attribute name="class" type="xs:string"/>
+    							</xs:complexType>
+    						</xs:element>
+    					</xs:sequence>
+    				</xs:complexType>
+    			</xs:element> 	
+    			
+    			<xs:element name="datasets"  minOccurs="0">
+    				<xs:complexType>
+    					<xs:sequence>
+    						<xs:element name="dataset" minOccurs="1" maxOccurs="unbounded">
+    							<xs:complexType>
+    								<xs:attribute name="ds-rel" type="xs:string" use="required"/>
+    								<xs:attribute name="name" type="xs:string" use="required"/>
+    								<xs:attribute name="recursive" type="xs:string" use="optional"/>
+    								<xs:attribute name="pattern" type="nxs:booleanType" use="optional"/>
+    								<xs:attribute name="title" type="xs:string" use="optional"/>
+    								<xs:attribute name="file" type="xs:string" use="required"/>
+    							</xs:complexType>
+    						</xs:element>
+    					</xs:sequence>
+    				</xs:complexType>
+    			</xs:element>		
+    		</xs:all>		
+    	</xs:complexType>	
+	</xs:element>			
+</xs:schema>				

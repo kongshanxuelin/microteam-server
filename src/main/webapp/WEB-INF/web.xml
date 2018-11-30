@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:jsp="http://java.sun.com/xml/ns/javaee/jsp" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+ 	<!-- JSP页面的字符编码 -->
+ 	<filter>
+		<filter-name>Encoding</filter-name>
+		<filter-class>
+			com.sumslack.jsptagex.web.filter.SetCharacterEncodingFilter
+		</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>Encoding</filter-name>
+		<url-pattern>*</url-pattern>
+	</filter-mapping>
+	
+	<filter>
+    	<filter-name>TagRestFilter</filter-name>
+    	<filter-class>com.sumslack.jsptagex.web.filter.TagRestFilter</filter-class>
+    	<init-param>
+      		<param-name>scanPackage</param-name>
+      		<param-value>/tag.rest.xml,com.sumslack.web.working.servlet</param-value>
+    	</init-param>    
+  	</filter>
+  	<filter-mapping>
+    	<filter-name>TagRestFilter</filter-name>
+    	<url-pattern>/*</url-pattern>
+  	</filter-mapping>
+	
+	<filter>
+		<filter-name>cors</filter-name>
+		<filter-class>
+			com.sumslack.web.working.filter.CORSFilter
+		</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>cors</filter-name>
+		<url-pattern>*</url-pattern>
+	</filter-mapping>
+  	
+    <listener>
+  		<listener-class>com.sumslack.jsptagex.web.listener.NBSListener</listener-class>
+    </listener>
+    
+    <!-- 支持restful跳转的servlet配置 -->
+  	<servlet>
+  		<servlet-name>dispatchServlet</servlet-name>
+  		<servlet-class>com.sumslack.jsptagex.web.servlet.TagDispatchServlet</servlet-class>
+  		<init-param>
+  			<param-name>prefix</param-name>
+  			<param-value>r</param-value>
+  		</init-param>  		
+  		<init-param>
+  			<param-name>scanPath</param-name>
+  			<param-value>com.sumslack.web.working.controller</param-value>
+  		</init-param>
+  		<init-param>
+  			<param-name>interceptor</param-name>
+  			<param-value>com.sumslack.web.working.interceptor.ControllerInterceptor</param-value>
+  		</init-param>
+  		<load-on-startup>1</load-on-startup>
+  	</servlet>
+	<servlet-mapping>
+		<servlet-name>dispatchServlet</servlet-name>
+		<url-pattern>/r/*</url-pattern>
+	</servlet-mapping>  
+	<servlet-mapping>
+		<servlet-name>dispatchServlet</servlet-name>
+		<url-pattern>*.plug</url-pattern>
+	</servlet-mapping>  
+	
+	<!-- freemarker配置 -->
+    <servlet>  
+	    <servlet-name>freemarker</servlet-name>  
+	    <servlet-class>freemarker.ext.servlet.FreemarkerServlet</servlet-class>  
+	  <init-param>    
+	      <param-name>TemplatePath</param-name>    
+	      <param-value>/</param-value>    
+	  </init-param>   
+	  <init-param>    
+	      <param-name>NoCache</param-name>    
+	      <param-value>true</param-value>    
+	  </init-param>    
+	    <init-param>  
+	        <param-name>ContentType</param-name>  
+	        <param-value>text/html;charset=UTF-8</param-value>  
+	    </init-param>  
+	    <init-param>  
+	        <param-name>template_update_delay</param-name>  
+	        <param-value>0</param-value>  
+	    </init-param>  
+	    <init-param>  
+	        <param-name>default_encoding</param-name>  
+	        <param-value>UTF-8</param-value>  
+	    </init-param>     
+	</servlet>  
+	<servlet-mapping>  
+	    <servlet-name>freemarker</servlet-name>  
+	    <url-pattern>*.ftl</url-pattern>  
+	</servlet-mapping> 
+    
+    <welcome-file-list>
+    	<welcome-file>/index.jsp</welcome-file>
+    </welcome-file-list>
+
+</web-app>

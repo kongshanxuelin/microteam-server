@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<datasets xmlns="http://www.sumscope.com"  
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.sumscope.com datasets.cfg.xsd" >
+<dataset id="test">
+<bizs>
+	<biz id="sql1" cache-rel="testCache">
+		<script>
+		<![CDATA[
+				select * from base_user
+			]]>	
+		</script>
+	</biz>
+	<biz id="sqlScript">
+		<script>
+		<![CDATA[
+				var ret = "select * from base_user where 1=1";
+				if("${param.islock}" !='all'){
+					ret += " and islock = '${param.islock}'";
+				}
+			]]>	
+		</script>	
+	</biz>
+	<biz id="javabiz" cache-rel="testCache" type="java" class="com.company.dataset.TestDataset" />
+</bizs>
+</dataset>
+</datasets>

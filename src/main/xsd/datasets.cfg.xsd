@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+				targetNamespace="http://www.sumscope.com"
+				xmlns:nxs="http://www.sumscope.com"
+				elementFormDefault="qualified">
+	<xs:include schemaLocation="common.xsd"/>				
+	<xs:element name="datasets">
+			<xs:complexType>
+ 				<xs:sequence>
+	    			<xs:element name="dataset" maxOccurs="unbounded" minOccurs="0">
+	    				<xs:complexType>
+		    				<xs:all>
+                            	<xs:element name="select" minOccurs="0">
+	                            	<xs:complexType>
+	                            		<xs:simpleContent>
+	                            			<xs:extension base="xs:string">
+	    										<xs:attribute name="init-arg" type="xs:string" use="optional"/>
+	    										<xs:attribute name="cache-rel" type="xs:string" use="optional"/>
+	    									</xs:extension>
+	    								</xs:simpleContent>
+	    							</xs:complexType>
+		    					</xs:element>
+                            	<xs:element name="selectOne" minOccurs="0">
+	                            	<xs:complexType>
+	                            		<xs:simpleContent>
+	                            			<xs:extension base="xs:string">
+	    										<xs:attribute name="cache-rel" type="xs:string" use="optional"/>
+	    									</xs:extension>
+	    								</xs:simpleContent>
+	    							</xs:complexType>
+		    					</xs:element>
+                            	<xs:element name="update" minOccurs="0">
+		    					</xs:element>
+		    					<xs:element name="insert" minOccurs="0">
+		    					</xs:element>
+		    					<xs:element name="delete" minOccurs="0">
+		    					</xs:element>
+		    					<xs:element name="java-select-aft" minOccurs="0">
+		    					</xs:element>
+		    					
+		    					<xs:element name="bizs" minOccurs="0">
+			    					<xs:complexType>
+		 								<xs:sequence>
+			 								<xs:element name="biz" maxOccurs="unbounded" minOccurs="0">
+					    						<xs:complexType >
+					    							<xs:all>
+						    						    <xs:element name="script" minOccurs="0" maxOccurs="1">
+								    					</xs:element>
+							    					</xs:all>
+							    					<xs:attribute name="type" type="nxs:scriptType" use="optional"/>
+						    						<xs:attribute name="id" type="xs:string" use="required"/>
+						    						<xs:attribute name="class" type="xs:string" use="optional"/>
+						    						<xs:attribute name="title" type="xs:string" use="optional"/>
+	    											<xs:attribute name="cache-rel" type="xs:string" use="optional"/>
+						    					</xs:complexType>
+						    					
+					    					</xs:element>
+		 								</xs:sequence>
+	 								</xs:complexType>
+		    					</xs:element>
+		    					
+		    				</xs:all>
+		    				<xs:attribute name="id" type="xs:string" use="required"/>
+		    				<xs:attribute name="pagenum" type="xs:string" use="optional"/>
+	    				</xs:complexType>
+	    				
+	    			</xs:element>
+				</xs:sequence>
+	    	</xs:complexType>	
+	</xs:element>			
+</xs:schema>				

@@ -1,21 +1,227 @@
 /*
-Navicat MySQL Data Transfer
+ Navicat Premium Data Transfer
 
-Source Server         : 192.168.1.242
-Source Server Version : 50513
-Source Host           : 192.168.1.242:3306
-Source Database       : sumslack_work
+ Source Server         : www.sumslack.com
+ Source Server Type    : MySQL
+ Source Server Version : 50628
+ Source Host           : www.sumslack.com
+ Source Database       : sumslack_work
 
-Target Server Type    : MYSQL
-Target Server Version : 50513
-File Encoding         : 65001
+ Target Server Type    : MySQL
+ Target Server Version : 50628
+ File Encoding         : utf-8
 
-Date: 2017-06-16 16:19:57
+ Date: 12/18/2018 15:29:06 PM
 */
 
-SET FOREIGN_KEY_CHECKS=0;
+SET NAMES utf8;
+SET FOREIGN_KEY_CHECKS = 0;
+
 -- ----------------------------
--- Table structure for `m_work_anno`
+--  Table structure for `ai_tencent_libs`
+-- ----------------------------
+DROP TABLE IF EXISTS `ai_tencent_libs`;
+CREATE TABLE `ai_tencent_libs` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `t` varchar(32) DEFAULT NULL,
+  `code` varchar(32) DEFAULT NULL,
+  `label` varchar(512) DEFAULT NULL,
+  `label2` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=1445 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+--  Table structure for `bond`
+-- ----------------------------
+DROP TABLE IF EXISTS `bond`;
+CREATE TABLE `bond` (
+  `bondid` varchar(32) DEFAULT NULL,
+  `bondkey` varchar(64) NOT NULL,
+  `shortname` varchar(512) DEFAULT NULL,
+  PRIMARY KEY (`bondkey`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+--  Table structure for `c_learning`
+-- ----------------------------
+DROP TABLE IF EXISTS `c_learning`;
+CREATE TABLE `c_learning` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `t` text,
+  `dt` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `yw` text,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+--  Table structure for `c_learning_rate`
+-- ----------------------------
+DROP TABLE IF EXISTS `c_learning_rate`;
+CREATE TABLE `c_learning_rate` (
+  `id` int(11) NOT NULL,
+  `num_e` bigint(255) DEFAULT NULL,
+  `num_t` bigint(255) DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+--  Table structure for `m_act`
+-- ----------------------------
+DROP TABLE IF EXISTS `m_act`;
+CREATE TABLE `m_act` (
+  `id` varchar(32) NOT NULL,
+  `title` varchar(512) DEFAULT NULL,
+  `d` text,
+  `start_date` datetime DEFAULT NULL,
+  `end_date` datetime DEFAULT NULL,
+  `freq_num` int(11) DEFAULT NULL,
+  `freq_unit` varchar(32) DEFAULT NULL,
+  `is_alarm` char(1) DEFAULT NULL,
+  `modifytime` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `teamid` varchar(32) DEFAULT NULL,
+  `alarm_before_num` int(11) DEFAULT NULL,
+  `alarm_before_unit` varchar(32) DEFAULT NULL,
+  `cur_start_date` datetime DEFAULT NULL,
+  `cur_end_date` datetime DEFAULT NULL,
+  `act_time` time DEFAULT NULL,
+  `act_addr` varchar(512) DEFAULT NULL,
+  `sts` char(1) DEFAULT NULL,
+  `min_num` int(11) DEFAULT NULL,
+  `cur_sts` char(1) DEFAULT NULL,
+  `uid` varchar(64) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+--  Table structure for `m_act_users`
+-- ----------------------------
+DROP TABLE IF EXISTS `m_act_users`;
+CREATE TABLE `m_act_users` (
+  `id` varchar(32) NOT NULL,
+  `uid` varchar(64) DEFAULT NULL,
+  `act_id` varchar(32) DEFAULT NULL,
+  `start_date` datetime DEFAULT NULL,
+  `end_date` datetime DEFAULT NULL,
+  `modifytime` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `sts` char(1) DEFAULT NULL,
+  `form_id` varchar(64) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+--  Table structure for `m_docs`
+-- ----------------------------
+DROP TABLE IF EXISTS `m_docs`;
+CREATE TABLE `m_docs` (
+  `id` varchar(32) NOT NULL DEFAULT '',
+  `title` varchar(512) DEFAULT NULL,
+  `pid` varchar(32) DEFAULT NULL,
+  `isfile` char(1) DEFAULT NULL,
+  `_ord` int(11) DEFAULT NULL,
+  `icon` varchar(512) DEFAULT NULL,
+  `teamid` varchar(32) DEFAULT NULL,
+  `create_uid` varchar(32) DEFAULT NULL,
+  `scope` char(1) DEFAULT NULL,
+  `fileid` varchar(32) DEFAULT NULL,
+  `content` text,
+  `cate` char(1) DEFAULT NULL COMMENT '1:内部文件夹 2：共享文件夹 3：我的文件夹',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+--  Table structure for `m_docs_share_rel`
+-- ----------------------------
+DROP TABLE IF EXISTS `m_docs_share_rel`;
+CREATE TABLE `m_docs_share_rel` (
+  `id` varchar(32) NOT NULL DEFAULT '',
+  `doc_id` varchar(32) DEFAULT NULL,
+  `share_scope` char(1) DEFAULT NULL,
+  `share_scope_id` varchar(32) DEFAULT NULL,
+  `_ops` int(11) DEFAULT NULL COMMENT '第一位：可管理 第二位：可查看/上传 第三位：可查看',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+--  Table structure for `m_logs`
+-- ----------------------------
+DROP TABLE IF EXISTS `m_logs`;
+CREATE TABLE `m_logs` (
+  `id` varchar(32) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `uid` varchar(64) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `title` varchar(128) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `params` text COLLATE utf8_unicode_ci,
+  `dt` datetime DEFAULT NULL,
+  `teamid` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `istop` int(1) DEFAULT NULL,
+  `addr` text COLLATE utf8_unicode_ci,
+  `scope` varchar(32) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `stype` char(1) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- ----------------------------
+--  Table structure for `m_logs_mapping`
+-- ----------------------------
+DROP TABLE IF EXISTS `m_logs_mapping`;
+CREATE TABLE `m_logs_mapping` (
+  `uri` varchar(128) NOT NULL DEFAULT '',
+  `title` varchar(128) DEFAULT NULL,
+  `isshow_team` char(1) DEFAULT NULL,
+  PRIMARY KEY (`uri`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+--  Table structure for `m_quan_comments`
+-- ----------------------------
+DROP TABLE IF EXISTS `m_quan_comments`;
+CREATE TABLE `m_quan_comments` (
+  `id` varchar(32) NOT NULL,
+  `fid` varchar(32) DEFAULT NULL,
+  `comment_content` text COMMENT 'T：文本消息\r\n            P：图片消息',
+  `create_time` datetime DEFAULT NULL,
+  `create_uid` varchar(32) DEFAULT NULL,
+  `ip` varchar(512) DEFAULT NULL,
+  `reply_uid` varchar(32) DEFAULT NULL,
+  `delflag` char(1) DEFAULT '0',
+  `modify_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `create_nick` varchar(64) DEFAULT NULL,
+  `reply_nick` varchar(64) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+--  Table structure for `m_quan_like`
+-- ----------------------------
+DROP TABLE IF EXISTS `m_quan_like`;
+CREATE TABLE `m_quan_like` (
+  `id` varchar(32) NOT NULL,
+  `uid` varchar(32) DEFAULT NULL,
+  `fid` varchar(32) DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
+  `create_uid` varchar(32) DEFAULT NULL,
+  `ip` varchar(1024) DEFAULT NULL,
+  `platform_id` varchar(8) DEFAULT NULL,
+  `delflag` char(1) DEFAULT '0',
+  `modify_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `nick` varchar(64) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+--  Table structure for `m_webstat_projects`
+-- ----------------------------
+DROP TABLE IF EXISTS `m_webstat_projects`;
+CREATE TABLE `m_webstat_projects` (
+  `id` varchar(32) NOT NULL DEFAULT '',
+  `prj_id` varchar(32) DEFAULT NULL,
+  `prj_title` varchar(512) DEFAULT NULL,
+  `dsname` varchar(512) DEFAULT NULL,
+  `teamid` varchar(32) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+--  Table structure for `m_work_anno`
 -- ----------------------------
 DROP TABLE IF EXISTS `m_work_anno`;
 CREATE TABLE `m_work_anno` (
@@ -31,12 +237,7 @@ CREATE TABLE `m_work_anno` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of m_work_anno
--- ----------------------------
-INSERT INTO m_work_anno VALUES ('l7vq2k7fuo', '阿道夫', '阿斯顿发', '1145', '2017-04-27 17:07:50', '1145', '2017-04-27 17:05:12', '71');
-
--- ----------------------------
--- Table structure for `m_work_company_tmpl`
+--  Table structure for `m_work_company_tmpl`
 -- ----------------------------
 DROP TABLE IF EXISTS `m_work_company_tmpl`;
 CREATE TABLE `m_work_company_tmpl` (
@@ -54,12 +255,28 @@ CREATE TABLE `m_work_company_tmpl` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of m_work_company_tmpl
+--  Table structure for `m_work_note`
 -- ----------------------------
-INSERT INTO m_work_company_tmpl VALUES ('1', '71', '1', 'task', '1', null, null, null, '2017-04-19 14:29:29', null);
+DROP TABLE IF EXISTS `m_work_note`;
+CREATE TABLE `m_work_note` (
+  `id` varchar(32) NOT NULL,
+  `company_id` varchar(32) DEFAULT NULL,
+  `title` varchar(2048) DEFAULT NULL,
+  `create_uid` varchar(64) DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
+  `modify_uid` varchar(64) DEFAULT NULL,
+  `modify_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `content` text,
+  `project_name` varchar(512) DEFAULT NULL,
+  `starttime` time DEFAULT NULL,
+  `endtime` time DEFAULT NULL,
+  `project_id` varchar(32) DEFAULT NULL,
+  `workdate` date DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Table structure for `m_work_process`
+--  Table structure for `m_work_process`
 -- ----------------------------
 DROP TABLE IF EXISTS `m_work_process`;
 CREATE TABLE `m_work_process` (
@@ -79,14 +296,7 @@ CREATE TABLE `m_work_process` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of m_work_process
--- ----------------------------
-INSERT INTO m_work_process VALUES ('1', '请假流程', null, '0', null, null, '2017-04-26 10:57:00', null, null, '2', '55', '3');
-INSERT INTO m_work_process VALUES ('2', '加班流程', null, '0', null, null, '2017-05-16 17:44:15', null, null, '3', '55', '2');
-INSERT INTO m_work_process VALUES ('3', '购书申请', null, '0', null, null, '2017-05-16 17:52:08', null, null, 'lhfhxlqi9s', '55', '2');
-
--- ----------------------------
--- Table structure for `m_work_process_audit_define`
+--  Table structure for `m_work_process_audit_define`
 -- ----------------------------
 DROP TABLE IF EXISTS `m_work_process_audit_define`;
 CREATE TABLE `m_work_process_audit_define` (
@@ -104,18 +314,7 @@ CREATE TABLE `m_work_process_audit_define` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of m_work_process_audit_define
--- ----------------------------
-INSERT INTO m_work_process_audit_define VALUES ('a', '上级审批', '0', '1', '54', '54', '2017-05-15 15:57:26', null, 'OR', '1');
-INSERT INTO m_work_process_audit_define VALUES ('b', 'CTO审批', '0', '2', '54', '54', '2017-05-15 15:57:26', null, 'AND', '1');
-INSERT INTO m_work_process_audit_define VALUES ('c', 'HR审批', '0', '3', '54', '54', '2017-05-15 15:57:33', null, 'AND', '1');
-INSERT INTO m_work_process_audit_define VALUES ('lhcb6myakg', 'team leader审批', '0', '1', '1145', '1145', '2017-05-16 13:34:49', '2017-05-16 13:38:04', 'OR', '2');
-INSERT INTO m_work_process_audit_define VALUES ('lhcbhqs8hs', '人事备案', '0', '2', '1145', '1145', '2017-05-16 13:35:30', '2017-05-16 13:38:45', 'OR', '2');
-INSERT INTO m_work_process_audit_define VALUES ('lhfj2bxwxs', 'Team Leader审批', '0', '1', '1145', '1145', '2017-05-16 17:51:24', '2017-05-16 17:54:40', 'OR', '3');
-INSERT INTO m_work_process_audit_define VALUES ('lhfjd75fcw', '购书人审批', '0', '2', '1145', '1145', '2017-05-16 17:52:04', '2017-05-16 17:55:20', 'OR', '3');
-
--- ----------------------------
--- Table structure for `m_work_process_audit_define_uid`
+--  Table structure for `m_work_process_audit_define_uid`
 -- ----------------------------
 DROP TABLE IF EXISTS `m_work_process_audit_define_uid`;
 CREATE TABLE `m_work_process_audit_define_uid` (
@@ -131,18 +330,7 @@ CREATE TABLE `m_work_process_audit_define_uid` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of m_work_process_audit_define_uid
--- ----------------------------
-INSERT INTO m_work_process_audit_define_uid VALUES ('1', 'a', '55', '2017-04-26 10:03:04', '1145', '2017-05-15 15:57:53', '1145', '54');
-INSERT INTO m_work_process_audit_define_uid VALUES ('2', 'b', '55', '2017-04-26 10:03:04', '1145', '2017-05-15 15:57:54', '1145', '54');
-INSERT INTO m_work_process_audit_define_uid VALUES ('3', 'c', '55', '2017-04-26 10:03:04', '1145', '2017-05-15 15:57:54', '1145', '54');
-INSERT INTO m_work_process_audit_define_uid VALUES ('lhcb6myzuo', 'lhcb6myakg', '72', '2017-05-16 13:38:04', '1145', '2017-05-16 13:34:49', '1145', '54');
-INSERT INTO m_work_process_audit_define_uid VALUES ('lhcbhqsl4w', 'lhcbhqs8hs', '72', '2017-05-16 13:38:45', '1145', '2017-05-16 13:35:30', '1145', '54');
-INSERT INTO m_work_process_audit_define_uid VALUES ('lhfj2bym80', 'lhfj2bxwxs', '72', '2017-05-16 17:54:40', '1145', '2017-05-16 17:51:24', '1145', '54');
-INSERT INTO m_work_process_audit_define_uid VALUES ('lhfjd764n4', 'lhfjd75fcw', '72', '2017-05-16 17:55:20', '1145', '2017-05-16 17:52:04', '1145', '54');
-
--- ----------------------------
--- Table structure for `m_work_process_instance`
+--  Table structure for `m_work_process_instance`
 -- ----------------------------
 DROP TABLE IF EXISTS `m_work_process_instance`;
 CREATE TABLE `m_work_process_instance` (
@@ -161,18 +349,7 @@ CREATE TABLE `m_work_process_instance` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of m_work_process_instance
--- ----------------------------
-INSERT INTO m_work_process_instance VALUES ('llfkkck9a8', '1', '0', '54', '54', '2017-05-24 17:13:27', '2017-05-24 17:17:07', 'F', '4', 'llfkkck9a9', 'F');
-INSERT INTO m_work_process_instance VALUES ('llfmius3r4', '1', '0', '54', '54', '2017-05-24 17:17:30', '2017-05-24 17:21:27', 'I', '1', 'llfmius3r5', 'F');
-INSERT INTO m_work_process_instance VALUES ('llfnb84l4w', '2', '0', '54', '54', '2017-05-24 17:19:15', '2017-05-24 17:23:12', 'I', '1', 'llfnb84l4x', 'F');
-INSERT INTO m_work_process_instance VALUES ('llfndxi9z4', '3', '0', '54', '54', '2017-05-24 17:19:25', '2017-05-24 17:23:22', 'I', '1', 'llfndxi9z5', 'F');
-INSERT INTO m_work_process_instance VALUES ('llxx7rn6kg', '1', '0', '54', '54', '2017-05-25 17:37:10', '2017-05-25 17:40:01', 'F', '4', 'llxx7rn6kh', 'F');
-INSERT INTO m_work_process_instance VALUES ('llxz1n2fwg', '1', '0', '54', '54', '2017-05-25 17:39:28', '2017-05-25 17:44:04', 'I', '1', 'llxz1n2fwh', 'F');
-INSERT INTO m_work_process_instance VALUES ('llxzj18u80', '2', '0', '54', '54', '2017-05-25 17:40:40', '2017-05-25 17:45:09', 'F', '3', 'llxzj18u81', 'F');
-
--- ----------------------------
--- Table structure for `m_work_process_instance_tasks`
+--  Table structure for `m_work_process_instance_tasks`
 -- ----------------------------
 DROP TABLE IF EXISTS `m_work_process_instance_tasks`;
 CREATE TABLE `m_work_process_instance_tasks` (
@@ -193,47 +370,7 @@ CREATE TABLE `m_work_process_instance_tasks` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of m_work_process_instance_tasks
--- ----------------------------
-INSERT INTO m_work_process_instance_tasks VALUES ('llfkms15vk', '1', '0', '54', '54', '2017-05-24 17:13:19', '2017-05-24 17:17:16', 'llfkkck9a8', '54', '1', '', 'a', '1');
-INSERT INTO m_work_process_instance_tasks VALUES ('llfko14lq8', '1', '0', '54', '54', '2017-05-24 17:13:24', '2017-05-24 17:17:21', 'llfkkck9a8', '54', '1', '', 'b', '2');
-INSERT INTO m_work_process_instance_tasks VALUES ('llfkotj75s', '1', '0', '54', '54', '2017-05-24 17:13:27', '2017-05-24 17:17:24', 'llfkkck9a8', '54', '1', '', 'c', '3');
-INSERT INTO m_work_process_instance_tasks VALUES ('llxxuk08ow', '1', '0', '54', '54', '2017-05-25 17:36:49', '2017-05-25 17:41:25', 'llxx7rn6kg', '54', '1', '', 'a', '1');
-INSERT INTO m_work_process_instance_tasks VALUES ('llxxxtk54w', '1', '0', '54', '54', '2017-05-25 17:37:01', '2017-05-25 17:41:37', 'llxx7rn6kg', '54', '1', '', 'b', '2');
-INSERT INTO m_work_process_instance_tasks VALUES ('llxy072tc0', '1', '0', '54', '54', '2017-05-25 17:37:10', '2017-05-25 17:41:46', 'llxx7rn6kg', '54', '1', '', 'c', '3');
-INSERT INTO m_work_process_instance_tasks VALUES ('llxzkdxuyo', '2', '0', '54', '54', '2017-05-25 17:40:37', '2017-05-25 17:45:14', 'llxzj18u80', '54', '1', '', 'lhcb6myakg', '1');
-INSERT INTO m_work_process_instance_tasks VALUES ('llxzl2hqtc', '2', '0', '54', '54', '2017-05-25 17:40:40', '2017-05-25 17:45:16', 'llxzj18u80', '54', '1', '', 'lhcbhqs8hs', '2');
-
--- ----------------------------
--- Table structure for `m_work_projects`
--- ----------------------------
-DROP TABLE IF EXISTS `m_work_projects`;
-CREATE TABLE `m_work_projects` (
-  `id` varchar(32) NOT NULL,
-  `title` varchar(512) DEFAULT NULL,
-  `content` text,
-  `delflag` char(1) DEFAULT NULL,
-  `create_uid` varchar(64) DEFAULT NULL,
-  `modify_uid` varchar(64) DEFAULT NULL,
-  `modify_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `ord_` int(11) DEFAULT NULL,
-  `avator_url` varchar(128) DEFAULT NULL,
-  `create_time` datetime DEFAULT NULL,
-  `start_time` datetime DEFAULT NULL,
-  `end_time` datetime DEFAULT NULL,
-  `owner_uid` varchar(64) DEFAULT NULL,
-  `company_id` varchar(64) DEFAULT NULL,
-  `sts` char(1) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of m_work_projects
--- ----------------------------
-INSERT INTO m_work_projects VALUES ('1', '项目1', '项目1描述', '0', '1145', '1145', '2017-04-19 14:14:08', '1', null, '2017-04-19 14:15:59', '2017-04-19 14:16:02', '2017-04-26 14:16:04', '1145', '71', '0');
-
--- ----------------------------
--- Table structure for `m_work_project_tasks`
+--  Table structure for `m_work_project_tasks`
 -- ----------------------------
 DROP TABLE IF EXISTS `m_work_project_tasks`;
 CREATE TABLE `m_work_project_tasks` (
@@ -258,12 +395,7 @@ CREATE TABLE `m_work_project_tasks` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of m_work_project_tasks
--- ----------------------------
-INSERT INTO m_work_project_tasks VALUES ('llezlg0glc', 'lhvxsn981s', '1', 'llezlg0t8g', '1', '1', '1111', '1977', '54', '2017-05-24 16:30:41', '54', '2017-05-24 16:27:09', '1900', null, '2017-05-24 00:00:00', '1209', '0');
-
--- ----------------------------
--- Table structure for `m_work_project_tasks_atta`
+--  Table structure for `m_work_project_tasks_atta`
 -- ----------------------------
 DROP TABLE IF EXISTS `m_work_project_tasks_atta`;
 CREATE TABLE `m_work_project_tasks_atta` (
@@ -281,11 +413,7 @@ CREATE TABLE `m_work_project_tasks_atta` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of m_work_project_tasks_atta
--- ----------------------------
-
--- ----------------------------
--- Table structure for `m_work_project_tasks_comments`
+--  Table structure for `m_work_project_tasks_comments`
 -- ----------------------------
 DROP TABLE IF EXISTS `m_work_project_tasks_comments`;
 CREATE TABLE `m_work_project_tasks_comments` (
@@ -301,11 +429,7 @@ CREATE TABLE `m_work_project_tasks_comments` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of m_work_project_tasks_comments
--- ----------------------------
-
--- ----------------------------
--- Table structure for `m_work_project_users`
+--  Table structure for `m_work_project_users`
 -- ----------------------------
 DROP TABLE IF EXISTS `m_work_project_users`;
 CREATE TABLE `m_work_project_users` (
@@ -320,11 +444,60 @@ CREATE TABLE `m_work_project_users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of m_work_project_users
+--  Table structure for `m_work_projects`
 -- ----------------------------
+DROP TABLE IF EXISTS `m_work_projects`;
+CREATE TABLE `m_work_projects` (
+  `id` varchar(32) NOT NULL,
+  `title` varchar(512) DEFAULT NULL,
+  `content` text,
+  `delflag` char(1) DEFAULT NULL,
+  `create_uid` varchar(64) DEFAULT NULL,
+  `modify_uid` varchar(64) DEFAULT NULL,
+  `modify_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `ord_` int(11) DEFAULT NULL,
+  `avator_url` varchar(128) DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
+  `start_time` datetime DEFAULT NULL,
+  `end_time` datetime DEFAULT NULL,
+  `owner_uid` varchar(64) DEFAULT NULL,
+  `company_id` varchar(64) DEFAULT NULL,
+  `sts` char(1) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Table structure for `m_work_signin`
+--  Table structure for `m_work_projects_zhang`
+-- ----------------------------
+DROP TABLE IF EXISTS `m_work_projects_zhang`;
+CREATE TABLE `m_work_projects_zhang` (
+  `id` varchar(32) NOT NULL,
+  `prj_id` varchar(32) DEFAULT NULL,
+  `d` tinyint(2) DEFAULT NULL,
+  `cate_id` int(11) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `dt` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `je` decimal(12,2) DEFAULT NULL,
+  `fzr` varchar(32) DEFAULT NULL,
+  `joiner` text,
+  `sts` char(1) DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+--  Table structure for `m_work_projects_zhang_cate`
+-- ----------------------------
+DROP TABLE IF EXISTS `m_work_projects_zhang_cate`;
+CREATE TABLE `m_work_projects_zhang_cate` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) DEFAULT NULL,
+  `dt` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `d` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+--  Table structure for `m_work_signin`
 -- ----------------------------
 DROP TABLE IF EXISTS `m_work_signin`;
 CREATE TABLE `m_work_signin` (
@@ -346,11 +519,7 @@ CREATE TABLE `m_work_signin` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of m_work_signin
--- ----------------------------
-
--- ----------------------------
--- Table structure for `m_work_signin_record`
+--  Table structure for `m_work_signin_record`
 -- ----------------------------
 DROP TABLE IF EXISTS `m_work_signin_record`;
 CREATE TABLE `m_work_signin_record` (
@@ -369,11 +538,7 @@ CREATE TABLE `m_work_signin_record` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of m_work_signin_record
--- ----------------------------
-
--- ----------------------------
--- Table structure for `m_work_tmpl`
+--  Table structure for `m_work_tmpl`
 -- ----------------------------
 DROP TABLE IF EXISTS `m_work_tmpl`;
 CREATE TABLE `m_work_tmpl` (
@@ -392,12 +557,12 @@ CREATE TABLE `m_work_tmpl` (
   `desc_header` text,
   `desc_footer` text,
   `form_js` longtext,
+  `view_page` varchar(512) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
 -- ----------------------------
--- Table structure for `m_work_tmpl_category`
+--  Table structure for `m_work_tmpl_category`
 -- ----------------------------
 DROP TABLE IF EXISTS `m_work_tmpl_category`;
 CREATE TABLE `m_work_tmpl_category` (
@@ -415,15 +580,7 @@ CREATE TABLE `m_work_tmpl_category` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of m_work_tmpl_category
--- ----------------------------
-INSERT INTO m_work_tmpl_category VALUES ('crm', 'CRM模板', null, '1', null, null, null, '2017-04-19 15:56:33', null, null);
-INSERT INTO m_work_tmpl_category VALUES ('log', '日志模板', null, '1', null, null, null, '2017-05-22 11:45:31', null, null);
-INSERT INTO m_work_tmpl_category VALUES ('process', '流程模板', null, '1', null, null, null, '2017-04-19 14:27:25', null, null);
-INSERT INTO m_work_tmpl_category VALUES ('task', '任务模板', null, '1', null, null, null, '2017-04-19 14:27:08', null, null);
-
--- ----------------------------
--- Table structure for `m_work_tmpl_data_scope`
+--  Table structure for `m_work_tmpl_data_scope`
 -- ----------------------------
 DROP TABLE IF EXISTS `m_work_tmpl_data_scope`;
 CREATE TABLE `m_work_tmpl_data_scope` (
@@ -436,12 +593,7 @@ CREATE TABLE `m_work_tmpl_data_scope` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of m_work_tmpl_data_scope
--- ----------------------------
-INSERT INTO m_work_tmpl_data_scope VALUES ('1', 'lowwr18kqo', '1803', null, 'all');
-
--- ----------------------------
--- Table structure for `m_work_tmpl_fields`
+--  Table structure for `m_work_tmpl_fields`
 -- ----------------------------
 DROP TABLE IF EXISTS `m_work_tmpl_fields`;
 CREATE TABLE `m_work_tmpl_fields` (
@@ -466,9 +618,8 @@ CREATE TABLE `m_work_tmpl_fields` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
 -- ----------------------------
--- Table structure for `m_work_tmpl_fields_value`
+--  Table structure for `m_work_tmpl_fields_value`
 -- ----------------------------
 DROP TABLE IF EXISTS `m_work_tmpl_fields_value`;
 CREATE TABLE `m_work_tmpl_fields_value` (
@@ -479,12 +630,12 @@ CREATE TABLE `m_work_tmpl_fields_value` (
   `delflag` char(1) DEFAULT NULL,
   `tmpl_id_id` varchar(32) DEFAULT NULL,
   `field_value_display` text,
+  `dt` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
 -- ----------------------------
--- Table structure for `m_work_tmpl_records`
+--  Table structure for `m_work_tmpl_records`
 -- ----------------------------
 DROP TABLE IF EXISTS `m_work_tmpl_records`;
 CREATE TABLE `m_work_tmpl_records` (
@@ -499,12 +650,12 @@ CREATE TABLE `m_work_tmpl_records` (
   `ip` varchar(512) DEFAULT NULL,
   `browser` text,
   `rec_id` varchar(32) DEFAULT NULL,
+  `source` char(1) DEFAULT 'w',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
 -- ----------------------------
--- Table structure for `teams`
+--  Table structure for `teams`
 -- ----------------------------
 DROP TABLE IF EXISTS `teams`;
 CREATE TABLE `teams` (
@@ -514,18 +665,12 @@ CREATE TABLE `teams` (
   `create_uid` varchar(64) DEFAULT NULL,
   `create_time` datetime DEFAULT NULL,
   `delflag` char(1) DEFAULT '0',
+  `pid` varchar(32) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of teams
--- ----------------------------
-INSERT INTO teams VALUES ('l8dhft9ngg', '测试222', null, 'opCDs0H1T08wjdQ-Xi9z2ALgvefI', '2017-04-28 16:43:36', '0');
-INSERT INTO teams VALUES ('l8dhm9ahhc', '啛啛喳喳333', null, 'opCDs0H1T08wjdQ-Xi9z2ALgvefI', '2017-04-28 16:44:00', '0');
-INSERT INTO teams VALUES ('l8diqjiby8', 'sdf', null, '1145', '2017-04-28 16:46:29', '0');
-
--- ----------------------------
--- Table structure for `teams_user`
+--  Table structure for `teams_user`
 -- ----------------------------
 DROP TABLE IF EXISTS `teams_user`;
 CREATE TABLE `teams_user` (
@@ -533,18 +678,40 @@ CREATE TABLE `teams_user` (
   `team_id` varchar(32) DEFAULT NULL,
   `role` varchar(32) DEFAULT NULL,
   `uid` varchar(64) DEFAULT NULL,
+  `team_tid` varchar(32) DEFAULT NULL,
+  `modifytime` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of teams_user
+--  Table structure for `uploads`
 -- ----------------------------
-INSERT INTO teams_user VALUES ('l8dhftacqo', 'l8dhft9ngg', 'owner', 'opCDs0H1T08wjdQ-Xi9z2ALgvefI');
-INSERT INTO teams_user VALUES ('l8dhm9b6rk', 'l8dhm9ahhc', 'owner', 'opCDs0H1T08wjdQ-Xi9z2ALgvefI');
-INSERT INTO teams_user VALUES ('l8diqjiolc', 'l8diqjiby8', 'owner', '1145');
+DROP TABLE IF EXISTS `uploads`;
+CREATE TABLE `uploads` (
+  `id` varchar(32) NOT NULL,
+  `name` varchar(128) DEFAULT NULL,
+  `path` varchar(1024) DEFAULT NULL,
+  `spath` varchar(1024) DEFAULT NULL,
+  `_ext` varchar(32) DEFAULT NULL,
+  `create_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Table structure for `users`
+--  Table structure for `uploads_rel`
+-- ----------------------------
+DROP TABLE IF EXISTS `uploads_rel`;
+CREATE TABLE `uploads_rel` (
+  `id` varchar(32) NOT NULL DEFAULT '',
+  `objType` varchar(32) DEFAULT NULL,
+  `objId` varchar(32) DEFAULT NULL,
+  `uploadId` varchar(32) DEFAULT NULL,
+  `dt` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+--  Table structure for `users`
 -- ----------------------------
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
@@ -553,21 +720,27 @@ CREATE TABLE `users` (
   `nick` varchar(512) DEFAULT NULL,
   `source` char(1) DEFAULT NULL,
   `company_id` varchar(32) DEFAULT NULL,
-  `company_name` varchar(512) DEFAULT NULL,
+  `company_name` varchar(1024) DEFAULT NULL,
   `token` varchar(32) DEFAULT NULL,
   `pwd` varchar(32) DEFAULT NULL,
-  `avatar` varchar(1024) DEFAULT NULL,
+  `avatar` varchar(4000) DEFAULT NULL,
   `dept` varchar(512) DEFAULT NULL,
+  `createtime` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `py` varchar(256) DEFAULT NULL,
+  `session_key` varchar(256) DEFAULT NULL,
+  `tel` varchar(64) DEFAULT NULL,
+  `truename` varchar(256) DEFAULT NULL,
+  `addr` varchar(1024) DEFAULT NULL,
+  `sumslack_uid` int(11) DEFAULT NULL,
+  `sign` text,
+  `dept_id` varchar(32) DEFAULT NULL,
+  `dept_name` varchar(512) DEFAULT NULL,
+  `email` varchar(512) DEFAULT NULL,
   PRIMARY KEY (`uid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of users
--- ----------------------------
-INSERT INTO users VALUES ('52', 'test1', 'Miyoki', 's', '71', null, 'luz4elb18g', '123456', '', null);
-INSERT INTO users VALUES ('53', 'test2', 'i心跳', 's', '71', null, 'lvg75yuww0', '123456', '', null);
--- ----------------------------
--- Table structure for `users_data_purview`
+--  Table structure for `users_data_purview`
 -- ----------------------------
 DROP TABLE IF EXISTS `users_data_purview`;
 CREATE TABLE `users_data_purview` (
@@ -582,15 +755,7 @@ CREATE TABLE `users_data_purview` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of users_data_purview
--- ----------------------------
-INSERT INTO users_data_purview VALUES ('lvgenbdp8g', '56', '53', 'Y', 'Y', 'N', 'luya1t258g');
-INSERT INTO users_data_purview VALUES ('lvgfcs0rnk', '56', '54', 'Y', 'Y', 'N', 'luya1t258g');
-INSERT INTO users_data_purview VALUES ('lvggp9fy80', '56', '55', 'Y', 'Y', 'N', 'luya1t258g');
-INSERT INTO users_data_purview VALUES ('lvggs9v5s0', '55', '53', 'Y', 'Y', 'N', 'luya1t258g');
-
--- ----------------------------
--- Table structure for `users_tmpl_purview`
+--  Table structure for `users_tmpl_purview`
 -- ----------------------------
 DROP TABLE IF EXISTS `users_tmpl_purview`;
 CREATE TABLE `users_tmpl_purview` (
@@ -604,3 +769,4 @@ CREATE TABLE `users_tmpl_purview` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+SET FOREIGN_KEY_CHECKS = 1;

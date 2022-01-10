@@ -8,7 +8,7 @@ import java.util.Map;
 import com.alibaba.fastjson.JSONObject;
 import com.sumslack.jsptagex.util.StrUtil;
 
-import gui.ava.html.Html2Image;
+//import gui.ava.html.Html2Image;
 
 public class QrCodeTemplateManager {
 	private static QrCodeTemplateManager instance = new QrCodeTemplateManager();

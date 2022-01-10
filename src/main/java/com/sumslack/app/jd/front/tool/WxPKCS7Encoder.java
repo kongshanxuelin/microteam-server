@@ -4,7 +4,7 @@ import java.nio.charset.Charset;
 import java.security.InvalidAlgorithmParameterException;
 import java.util.Arrays;
 
-import org.bouncycastle.util.encoders.Base64;
+
 /**
 * Created by Kevin Dong on 2017/1/5.
 */

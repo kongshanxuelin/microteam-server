@@ -28,7 +28,7 @@ public class WxService {
 	private static String accessToken = "";
 	
 	public void genQrCode(String scene,int width,ServletResponse response){
-			String url = "http://api.weixin.qq.com/wxa/getwxacodeunlimit?access_token=" + getMsgToken();
+			String url = "https://api.weixin.qq.com/wxa/getwxacodeunlimit?access_token=" + getMsgToken();
 			String json = "{"+
 				    "\"scene\":\""+scene+"\","+
 				    "\"width\":\""+width+"\""+

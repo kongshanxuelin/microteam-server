@@ -20,7 +20,7 @@ import javax.servlet.ServletResponse;
 
 import org.apache.commons.codec.digest.DigestUtils;
 
-import com.lowagie.text.html.HtmlEncoder;
+
 /**
  * @author 
  * @version 创建时间：2017年1月17日 下午7:46:29 类说明

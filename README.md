@@ -1,46 +1,73 @@
-[![QQ](http://pub.idqqimg.com/wpa/images/group.png)](https://jq.qq.com/?_wv=1027&k=5HWgxBZ)
+<p align="center">
+  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
+</p>
 
-微信小团队管理小程序服务端
-===================
+[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
+[circleci-url]: https://circleci.com/gh/nestjs/nest
 
-欢迎加入QQ群讨论（群号：604844003）
+  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
+    <p align="center">
+<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
+<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
+<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
+<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
+<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
+<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
+<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
+<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
+  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
+    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
+  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
+</p>
+  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
+  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-服务端代码，其中客户端代码：https://github.com/kongshanxuelin/microteam
+## Description
 
-## 运行
+[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
-`maven build tomcat7:run`
+## Installation
 
-## 修改配置app.xml
-修改微信小程序配置：
-
+```bash
+$ yarn install
 ```
-		<!-- wx app config -->
-		<item name="wx.appid" value="xxxxx"/>
-		<item name="wx.seckey" value="xxxxx"/>
-		<item name="wx.mchid" value="xxxx"/>
-		<item name="wx.mchkey" value="xxxxx"/>
-		<item name="wx.paynotify" value="xxxxxx"/>
-		<item name="wx.template.notify" value="xxxxx" />
+
+## Running the app
+
+```bash
+# development
+$ yarn run start
+
+# watch mode
+$ yarn run start:dev
+
+# production mode
+$ yarn run start:prod
 ```
 
-[小团队管理](http://code.sumslack.com/projects.jsp?id=mql6e4afb4) 是一款开源的微信小程序，主要用于日常的小团队管理，功能列表如下：
-- 团队公告；
-- 团队工作流程定义与办理；
-- 团队圈；
-- 团队活动组织；
-- 团队考勤；
-- 任务指派；
-- 工作报告（日报、周报、月报）；
-- 共享文档；
-- 团队小程序分享；
-- 团队通讯录；
+## Test
 
-使用微信扫描二维码查看效果：
+```bash
+# unit tests
+$ yarn run test
 
-<img src='http://h5.sumslack.com/img/mteam1.jpg' width='320' alt='preview' />
+# e2e tests
+$ yarn run test:e2e
 
+# test coverage
+$ yarn run test:cov
+```
 
-效果图：
+## Support
 
-<img src='http://h5.sumslack.com/img/mteam_preview1.jpg' alt='preview' /><img src='http://h5.sumslack.com/img/mteam_preview2.jpg' alt='preview' /><img src='http://h5.sumslack.com/img/mteam_preview3.jpg' alt='preview' /><img src='http://h5.sumslack.com/img/ai.jpg' alt='preview' />
+Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+
+## Stay in touch
+
+- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
+- Website - [https://nestjs.com](https://nestjs.com/)
+- Twitter - [@nestframework](https://twitter.com/nestframework)
+
+## License
+
+Nest is [MIT licensed](LICENSE).
